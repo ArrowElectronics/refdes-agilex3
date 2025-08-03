@@ -1,0 +1,29 @@
+# Demo source code
+
+niosv-app --bsp_dir=software/bsp --app_dir=software/app -s=software/app/axc3000_demo_refdes.c
+
+# Launch RiscFree IDE
+
+riscfree -data software
+
+# Create demo.hex for onchip memory in the FPGA
+
+elf2hex software/app/build/Debug/app.elf -b 0x00000000 -w 32 -e 0x0003FFFF --record=4 -o demo.hex
+
+# Compile in Quartus, define pin assignments
+
+source sources/axe3000_pin_assignment.tcl
+
+# Download sof and elf
+
+quartus_pgm -c 1 -m jtag -o "p;ax3000_top.sof@1"
+
+niosv-download -g -r -c 1 software/app/build/Debug/app.elf
+
+# Create flashable file
+
+quartus_pfg.exe -c axc3000_top.sof axc3000_top.jic -o device=MT25QU256 -o flash_loader=A3CY100BM16AE7S -o mode=ASX4
+
+# Flash the AXC3000
+
+quartus_pgm.exe -c 1 -m jtag -o "pvbi;axc3000_top.jic@1"
