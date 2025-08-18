@@ -12,11 +12,11 @@ elf2hex software/app/build/Debug/app.elf -b 0x00000000 -w 32 -e 0x0003FFFF --rec
 
 # Compile in Quartus, define pin assignments
 
-source sources/axe3000_pin_assignment.tcl
+source sources/axc3000_pin_assignment.tcl
 
 # Download sof and elf
 
-quartus_pgm -c 1 -m jtag -o "p;ax3000_top.sof@1"
+quartus_pgm -c 1 -m jtag -o "p;axc3000_top.sof@1"
 
 niosv-download -g -r -c 1 software/app/build/Debug/app.elf
 
