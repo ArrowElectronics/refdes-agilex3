@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ip name="Agilex Reset Release IP">
+ <timestamp>2025-04-10T10:23:07.957596400</timestamp>
+ <file></file>
+ <old_version>1.0.0</old_version>
+ <new_version>1.0.1</new_version>
+ <old_family>Agilex 5</old_family>
+ <new_family>Agilex 3</new_family>
+ <changes>
+  <change>1.0.1</change>
+  <change> Add supported device family. </change>
+ </changes>
+</ip>
